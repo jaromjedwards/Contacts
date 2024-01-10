@@ -1,8 +1,8 @@
 const routes = require('express').Router();
-const lesson1Controller = require('../controllers/contacts');
+const contacts = require('../controllers/contacts');
 
-routes.get('/', lesson1Controller.jaromRoute);
-routes.get('/kayla', lesson1Controller.kaylaRoute);
-routes.get('/magdelene', lesson1Controller.magdeleneRoute)
+routes.get('/', contacts.jaromRoute);
+routes.get('/kayla', contacts.kaylaRoute);
+routes.get('/magdelene', contacts.magdeleneRoute)
 
 module.exports = routes; 
