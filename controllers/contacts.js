@@ -11,7 +11,7 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
     const contactId = new ObjectId(req.params.id);
     const db = mongodb.getDatabase();
-    const contact = await db.collection('Contacts').findOne({ _id: contactId });
+    const contact = await db.db().collection('Contacts').findOne({ _id: contactId });
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(contact);
 }
