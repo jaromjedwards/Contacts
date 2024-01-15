@@ -1,8 +1,8 @@
 const routes = require('express').Router();
-const users = require('./users');
+const contacts = require('./contacts');
 
 routes.get('/', (req, res) => (res.send('Hello World')));
 
-routes.use('/users', users);
+routes.use('/contacts', contacts);
 
 module.exports = routes;
