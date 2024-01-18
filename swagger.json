@@ -5,9 +5,10 @@
     "description": "Users Api",
     "version": "1.0.0"
   },
-  "host": "projects-lvz8.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
@@ -21,6 +22,7 @@
         }
       }
     },
+
     "/contacts/": {
       "get": {
         "description": "",
