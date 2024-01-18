@@ -23,7 +23,7 @@ const createContact = async (req, res) => {
         favoriteColor: req.body.favoriteColor,
         birthday: req.body.birthday
     };
-    const response = await mongodb.getDatabase().db().collection('users').insertOne(contact);
+    const response = await mongodb.getDatabase().db().collection('Contacts').insertOne(contact);
     if (response.acknowledged) {
         res.status(204).send();
     } else {
@@ -32,6 +32,8 @@ const createContact = async (req, res) => {
 };
 const updateContact = async (req, res) => {
     const contactId = new ObjectId(req.params.id);
+    console.log('Contact ID Type:', typeof contactId); // Add this line
+
     const contact = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -39,17 +41,29 @@ const updateContact = async (req, res) => {
         favoriteColor: req.body.favoriteColor,
         birthday: req.body.birthday
     };
-    const response = await mongodb.getDatabase().db().collection('contacts').replaceOne({ _id: contactId }, contact);
-    if (response.modifiedCount > 0) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error occured while updating the contact')
+
+    console.log('Contact ID:', contactId);
+    console.log('Updated Contact:', contact);
+
+    try {
+        const response = await mongodb.getDatabase().db().collection('Contacts').replaceOne({ _id: contactId }, contact);
+        console.log('ReplaceOne Response:', response);
+
+        if (response.modifiedCount > 0) {
+            res.status(204).send();
+        } else {
+            res.status(500).json({ error: 'No contact updated' });
+        }
+    } catch (error) {
+        console.error('Error updating contact:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-}
+};
+
 const deleteContact = async (req, res) => {
     const contactId = new ObjectId(req.params.id);
 
-    const response = await mongodb.getDatabase().db().collection('contacts').deleteOne({ _id: contactId });
+    const response = await mongodb.getDatabase().db().collection('Contacts').deleteOne({ _id: contactId });
 
     if (response.deletedCount > 0) {
         res.status(204).send();
