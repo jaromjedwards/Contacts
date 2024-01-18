@@ -32,7 +32,7 @@ const createContact = async (req, res) => {
 };
 const updateContact = async (req, res) => {
     const contactId = new ObjectId(req.params.id);
-    console.log('Contact ID Type:', typeof contactId); // Add this line
+    console.log('Contact ID Type:', typeof contactId);
 
     const contact = {
         firstName: req.body.firstName,
