@@ -1,7 +1,12 @@
-const routes = require('express').Router();
+const router = require('express').Router();
 const contacts = require('./contacts');
 
-routes.get('/', (req, res) => (res.send('Hello World')));
-routes.use('/contacts', contacts);
+router.use('/', require('./swagger'));
 
-module.exports = routes;
+router.get('/', (req, res) => {
+    //swagger.tags=['Hello World]
+    res.send('Hello World');
+})
+router.use('/contacts', contacts);
+
+module.exports = router;
